@@ -1,0 +1,29 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: TheMGRF <thomas.grf@googlemail.com>
+Date: Sat, 21 Mar 2020 17:58:35 +0000
+Subject: [PATCH] New wandering trader perk
+
+
+diff --git a/src/main/java/net/minecraft/server/EntityVillagerTrader.java b/src/main/java/net/minecraft/server/EntityVillagerTrader.java
+index 2ad8dba5c0f8424becacda44232813c5f4451fd4..a3c161a7093295c3ca7922aa196a300062b5ea33 100644
+--- a/src/main/java/net/minecraft/server/EntityVillagerTrader.java
++++ b/src/main/java/net/minecraft/server/EntityVillagerTrader.java
+@@ -29,6 +29,9 @@ public class EntityVillagerTrader extends EntityVillagerAbstract {
+         this.goalSelector.a(0, new PathfinderGoalUseItem<>(this, new ItemStack(Items.MILK_BUCKET), SoundEffects.ENTITY_WANDERING_TRADER_REAPPEARED, (entityvillagertrader) -> {
+             return this.world.isDay() && entityvillagertrader.isInvisible();
+         }));
++        this.goalSelector.a(0, new PathfinderGoalUseItem<>(this, PotionUtil.a(new ItemStack(Items.POTION), Potions.HEALING), SoundEffects.ENTITY_WANDERING_TRADER_DRINK_POTION, (entityvillagertrader) -> {
++            return entityvillagertrader.getHealth() < entityvillagertrader.getHealth() / 2;
++        }));
+         this.goalSelector.a(1, new PathfinderGoalTradeWithPlayer(this));
+         this.goalSelector.a(1, new PathfinderGoalAvoidTarget<>(this, EntityZombie.class, 8.0F, 0.5D, 0.5D));
+         this.goalSelector.a(1, new PathfinderGoalAvoidTarget<>(this, EntityEvoker.class, 12.0F, 0.5D, 0.5D));
+@@ -36,7 +39,7 @@ public class EntityVillagerTrader extends EntityVillagerAbstract {
+         this.goalSelector.a(1, new PathfinderGoalAvoidTarget<>(this, EntityVex.class, 8.0F, 0.5D, 0.5D));
+         this.goalSelector.a(1, new PathfinderGoalAvoidTarget<>(this, EntityPillager.class, 15.0F, 0.5D, 0.5D));
+         this.goalSelector.a(1, new PathfinderGoalAvoidTarget<>(this, EntityIllagerIllusioner.class, 12.0F, 0.5D, 0.5D));
+-        this.goalSelector.a(1, new PathfinderGoalPanic(this, 0.5D));
++        //this.goalSelector.a(1, new PathfinderGoalPanic(this, 0.5D)); // Genie
+         this.goalSelector.a(1, new PathfinderGoalLookAtTradingPlayer(this));
+         this.goalSelector.a(2, new EntityVillagerTrader.a(this, 2.0D, 0.35D));
+         this.goalSelector.a(4, new PathfinderGoalMoveTowardsRestriction(this, 0.35D));

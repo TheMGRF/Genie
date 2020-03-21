@@ -1,0 +1,56 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: TheMGRF <thomas.grf@googlemail.com>
+Date: Sat, 21 Mar 2020 17:51:46 +0000
+Subject: [PATCH] Stop being mean to Turtles
+
+
+diff --git a/src/main/java/net/minecraft/server/EntityFox.java b/src/main/java/net/minecraft/server/EntityFox.java
+index 7fe88622002453146f38678e8459e8e6243681c3..28471978900b22ef26a86a0bf7e6d1173695202f 100644
+--- a/src/main/java/net/minecraft/server/EntityFox.java
++++ b/src/main/java/net/minecraft/server/EntityFox.java
+@@ -38,7 +38,7 @@ public class EntityFox extends EntityAnimal {
+         return !entity.bm() && IEntitySelector.e.test(entity);
+     };
+     private PathfinderGoal bE;
+-    private PathfinderGoal bF;
++    //private PathfinderGoal bF; // Genie
+     private PathfinderGoal bG;
+     private float bH;
+     private float bI;
+@@ -69,7 +69,7 @@ public class EntityFox extends EntityAnimal {
+         this.bE = new PathfinderGoalNearestAttackableTarget<>(this, EntityAnimal.class, 10, false, false, (entityliving) -> {
+             return entityliving instanceof EntityChicken || entityliving instanceof EntityRabbit;
+         });
+-        this.bF = new PathfinderGoalNearestAttackableTarget<>(this, EntityTurtle.class, 10, false, false, EntityTurtle.bw);
++        //this.bF = new PathfinderGoalNearestAttackableTarget<>(this, EntityTurtle.class, 10, false, false, EntityTurtle.bw); // Genie
+         this.bG = new PathfinderGoalNearestAttackableTarget<>(this, EntityFish.class, 20, false, false, (entityliving) -> {
+             return entityliving instanceof EntityFishSchool;
+         });
+@@ -228,12 +228,12 @@ public class EntityFox extends EntityAnimal {
+     private void initializePathFinderGoals() {
+         if (this.getFoxType() == EntityFox.Type.RED) {
+             this.targetSelector.a(4, this.bE);
+-            this.targetSelector.a(4, this.bF);
++            //this.targetSelector.a(4, this.bF); // Genie
+             this.targetSelector.a(6, this.bG);
+         } else {
+             this.targetSelector.a(4, this.bG);
+             this.targetSelector.a(6, this.bE);
+-            this.targetSelector.a(6, this.bF);
++            //this.targetSelector.a(6, this.bF); // Genie
+         }
+ 
+     }
+diff --git a/src/main/java/net/minecraft/server/EntityOcelot.java b/src/main/java/net/minecraft/server/EntityOcelot.java
+index 6da5b0a9f3985aab812c5e623aee5216454593b6..7d8963206ce304c85a5e2ddaa37d621a57bd020d 100644
+--- a/src/main/java/net/minecraft/server/EntityOcelot.java
++++ b/src/main/java/net/minecraft/server/EntityOcelot.java
+@@ -54,7 +54,7 @@ public class EntityOcelot extends EntityAnimal {
+         this.goalSelector.a(10, new PathfinderGoalRandomStrollLand(this, 0.8D, 1.0000001E-5F));
+         //this.goalSelector.a(11, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 10.0F)); // Genie
+         this.targetSelector.a(1, new PathfinderGoalNearestAttackableTarget<>(this, EntityChicken.class, false));
+-        this.targetSelector.a(1, new PathfinderGoalNearestAttackableTarget<>(this, EntityTurtle.class, 10, false, false, EntityTurtle.bw));
++        //this.targetSelector.a(1, new PathfinderGoalNearestAttackableTarget<>(this, EntityTurtle.class, 10, false, false, EntityTurtle.bw)); // Genie
+     }
+ 
+     @Override

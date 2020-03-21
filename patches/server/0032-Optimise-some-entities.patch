@@ -1,0 +1,498 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: TheMGRF <thomas.grf@googlemail.com>
+Date: Sat, 21 Mar 2020 17:44:18 +0000
+Subject: [PATCH] Optimise some entities
+
+
+diff --git a/src/main/java/net/minecraft/server/EntityCat.java b/src/main/java/net/minecraft/server/EntityCat.java
+index 57af3835eee8c3befd682e8cdcf41b921976c2c0..35f4938ec0fcfcf6f9655eda76c3df9b3c25e195 100644
+--- a/src/main/java/net/minecraft/server/EntityCat.java
++++ b/src/main/java/net/minecraft/server/EntityCat.java
+@@ -54,14 +54,14 @@ public class EntityCat extends EntityTameableAnimal {
+         this.goalSelector.a(1, new EntityCat.b(this));
+         this.goalSelector.a(2, this.goalSit);
+         this.goalSelector.a(3, this.bG);
+-        this.goalSelector.a(5, new PathfinderGoalCatSitOnBed(this, 1.1D, 8));
++        //this.goalSelector.a(5, new PathfinderGoalCatSitOnBed(this, 1.1D, 8)); // Genie
+         this.goalSelector.a(6, new PathfinderGoalFollowOwner(this, 1.0D, 10.0F, 5.0F, false));
+         this.goalSelector.a(7, new PathfinderGoalJumpOnBlock(this, 0.8D));
+         this.goalSelector.a(8, new PathfinderGoalLeapAtTarget(this, 0.3F));
+         this.goalSelector.a(9, new PathfinderGoalOcelotAttack(this));
+         this.goalSelector.a(10, new PathfinderGoalBreed(this, 0.8D));
+         this.goalSelector.a(11, new PathfinderGoalRandomStrollLand(this, 0.8D, 1.0000001E-5F));
+-        this.goalSelector.a(12, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 10.0F));
++        //this.goalSelector.a(12, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 10.0F)); // Genie
+         this.targetSelector.a(1, new PathfinderGoalRandomTargetNonTamed<>(this, EntityRabbit.class, false, (Predicate) null));
+         this.targetSelector.a(1, new PathfinderGoalRandomTargetNonTamed<>(this, EntityTurtle.class, false, EntityTurtle.bw));
+     }
+diff --git a/src/main/java/net/minecraft/server/EntityChicken.java b/src/main/java/net/minecraft/server/EntityChicken.java
+index 65795fc896b5f07437974f5626f8fcb3d05fb1b6..31f590223e3f159ec1f135c78a2282ca9c65c26e 100644
+--- a/src/main/java/net/minecraft/server/EntityChicken.java
++++ b/src/main/java/net/minecraft/server/EntityChicken.java
+@@ -20,13 +20,13 @@ public class EntityChicken extends EntityAnimal {
+     @Override
+     protected void initPathfinder() {
+         this.goalSelector.a(0, new PathfinderGoalFloat(this));
+-        this.goalSelector.a(1, new PathfinderGoalPanic(this, 1.4D));
++        //this.goalSelector.a(1, new PathfinderGoalPanic(this, 1.4D)); // Genie
+         this.goalSelector.a(2, new PathfinderGoalBreed(this, 1.0D));
+         this.goalSelector.a(3, new PathfinderGoalTempt(this, 1.0D, false, EntityChicken.bD));
+         this.goalSelector.a(4, new PathfinderGoalFollowParent(this, 1.1D));
+         this.goalSelector.a(5, new PathfinderGoalRandomStrollLand(this, 1.0D));
+-        this.goalSelector.a(6, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 6.0F));
+-        this.goalSelector.a(7, new PathfinderGoalRandomLookaround(this));
++        //this.goalSelector.a(6, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 6.0F)); // Genie
++        //this.goalSelector.a(7, new PathfinderGoalRandomLookaround(this)); // Genie
+     }
+ 
+     @Override
+diff --git a/src/main/java/net/minecraft/server/EntityCow.java b/src/main/java/net/minecraft/server/EntityCow.java
+index 2c8bbf20ae7f9be2c57822833bb285b86ea1a901..df2a9ac654c71dbd5241798353158cd0e8a375ec 100644
+--- a/src/main/java/net/minecraft/server/EntityCow.java
++++ b/src/main/java/net/minecraft/server/EntityCow.java
+@@ -14,13 +14,13 @@ public class EntityCow extends EntityAnimal {
+     @Override
+     protected void initPathfinder() {
+         this.goalSelector.a(0, new PathfinderGoalFloat(this));
+-        this.goalSelector.a(1, new PathfinderGoalPanic(this, 2.0D));
++        //this.goalSelector.a(1, new PathfinderGoalPanic(this, 2.0D)); // Genie
+         this.goalSelector.a(2, new PathfinderGoalBreed(this, 1.0D));
+         this.goalSelector.a(3, new PathfinderGoalTempt(this, 1.25D, RecipeItemStack.a(Items.WHEAT), false));
+         this.goalSelector.a(4, new PathfinderGoalFollowParent(this, 1.25D));
+         this.goalSelector.a(5, new PathfinderGoalRandomStrollLand(this, 1.0D));
+-        this.goalSelector.a(6, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 6.0F));
+-        this.goalSelector.a(7, new PathfinderGoalRandomLookaround(this));
++        //this.goalSelector.a(6, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 6.0F)); // Genie
++        //this.goalSelector.a(7, new PathfinderGoalRandomLookaround(this)); // Genie
+     }
+ 
+     @Override
+diff --git a/src/main/java/net/minecraft/server/EntityDolphin.java b/src/main/java/net/minecraft/server/EntityDolphin.java
+index ce78586ea01853d19bd7e4ac976fce1ed3577e1e..cd4cbdb9b563ee942fefd0edfefc87fa725d5a64 100644
+--- a/src/main/java/net/minecraft/server/EntityDolphin.java
++++ b/src/main/java/net/minecraft/server/EntityDolphin.java
+@@ -101,7 +101,7 @@ public class EntityDolphin extends EntityWaterAnimal {
+         this.goalSelector.a(2, new EntityDolphin.c(this, 4.0D));
+         this.goalSelector.a(4, new PathfinderGoalRandomSwim(this, 1.0D, 10));
+         this.goalSelector.a(4, new PathfinderGoalRandomLookaround(this));
+-        this.goalSelector.a(5, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 6.0F));
++        //this.goalSelector.a(5, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 6.0F)); // Genie
+         this.goalSelector.a(5, new PathfinderGoalWaterJump(this, 10));
+         this.goalSelector.a(6, new PathfinderGoalMeleeAttack(this, 1.2000000476837158D, true));
+         this.goalSelector.a(8, new EntityDolphin.d());
+diff --git a/src/main/java/net/minecraft/server/EntityFox.java b/src/main/java/net/minecraft/server/EntityFox.java
+index 82a32d5dbf162b8c67c701d0c9647ddca103ddef..7fe88622002453146f38678e8459e8e6243681c3 100644
+--- a/src/main/java/net/minecraft/server/EntityFox.java
++++ b/src/main/java/net/minecraft/server/EntityFox.java
+@@ -94,7 +94,7 @@ public class EntityFox extends EntityAnimal {
+         this.goalSelector.a(10, new PathfinderGoalLeapAtTarget(this, 0.4F));
+         this.goalSelector.a(11, new PathfinderGoalRandomStrollLand(this, 1.0D));
+         this.goalSelector.a(11, new EntityFox.p());
+-        this.goalSelector.a(12, new EntityFox.j(this, EntityHuman.class, 24.0F));
++        //this.goalSelector.a(12, new EntityFox.j(this, EntityHuman.class, 24.0F)); // Genie
+         this.goalSelector.a(13, new EntityFox.r());
+         this.targetSelector.a(3, new EntityFox.a(EntityLiving.class, false, false, (entityliving) -> {
+             return EntityFox.bB.test(entityliving) && !this.c(entityliving.getUniqueID());
+@@ -612,22 +612,24 @@ public class EntityFox extends EntityAnimal {
+         return true;
+     }
+ 
+-    class j extends PathfinderGoalLookAtPlayer {
+-
+-        public j(EntityInsentient entityinsentient, Class oclass, float f) {
+-            super(entityinsentient, oclass, f);
+-        }
+-
+-        @Override
+-        public boolean a() {
+-            return super.a() && !EntityFox.this.es() && !EntityFox.this.eA();
+-        }
+-
+-        @Override
+-        public boolean b() {
+-            return super.b() && !EntityFox.this.es() && !EntityFox.this.eA();
+-        }
+-    }
++    // Genie start
++//    class j extends PathfinderGoalLookAtPlayer {
++//
++//        public j(EntityInsentient entityinsentient, Class oclass, float f) {
++//            super(entityinsentient, oclass, f);
++//        }
++//
++//        @Override
++//        public boolean a() {
++//            return super.a() && !EntityFox.this.es() && !EntityFox.this.eA();
++//        }
++//
++//        @Override
++//        public boolean b() {
++//            return super.b() && !EntityFox.this.es() && !EntityFox.this.eA();
++//        }
++//    }
++    // Genie end
+ 
+     class h extends PathfinderGoalFollowParent {
+ 
+diff --git a/src/main/java/net/minecraft/server/EntityIronGolem.java b/src/main/java/net/minecraft/server/EntityIronGolem.java
+index 7f6a56776000643ecc42b0b917f6673b7b038d79..055bc800a24301cfb5cecb9e7b4e5db709303323 100644
+--- a/src/main/java/net/minecraft/server/EntityIronGolem.java
++++ b/src/main/java/net/minecraft/server/EntityIronGolem.java
+@@ -27,7 +27,7 @@ public class EntityIronGolem extends EntityGolem {
+         }));
+         this.goalSelector.a(5, new PathfinderGoalOfferFlower(this));
+         this.goalSelector.a(6, new PathfinderGoalRandomStrollLand(this, 0.6D));
+-        this.goalSelector.a(7, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 6.0F));
++        //this.goalSelector.a(7, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 6.0F)); // Genie
+         this.goalSelector.a(8, new PathfinderGoalRandomLookaround(this));
+         this.targetSelector.a(1, new PathfinderGoalDefendVillage(this));
+         this.targetSelector.a(2, new PathfinderGoalHurtByTarget(this, new Class[0]));
+diff --git a/src/main/java/net/minecraft/server/EntityLlama.java b/src/main/java/net/minecraft/server/EntityLlama.java
+index 193dbfc5f684bfe46f69cb2ab2c52dbb44707792..24eb8aca506e0a34b14bd81a087718d4f44b3c02 100644
+--- a/src/main/java/net/minecraft/server/EntityLlama.java
++++ b/src/main/java/net/minecraft/server/EntityLlama.java
+@@ -61,12 +61,12 @@ public class EntityLlama extends EntityHorseChestedAbstract implements IRangedEn
+         this.goalSelector.a(1, new PathfinderGoalTame(this, 1.2D));
+         this.goalSelector.a(2, new PathfinderGoalLlamaFollow(this, 2.0999999046325684D));
+         this.goalSelector.a(3, new PathfinderGoalArrowAttack(this, 1.25D, 40, 20.0F));
+-        this.goalSelector.a(3, new PathfinderGoalPanic(this, 1.2D));
++        //this.goalSelector.a(3, new PathfinderGoalPanic(this, 1.2D)); // Genie
+         this.goalSelector.a(4, new PathfinderGoalBreed(this, 1.0D));
+         this.goalSelector.a(5, new PathfinderGoalFollowParent(this, 1.0D));
+         this.goalSelector.a(6, new PathfinderGoalRandomStrollLand(this, 0.7D));
+-        this.goalSelector.a(7, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 6.0F));
+-        this.goalSelector.a(8, new PathfinderGoalRandomLookaround(this));
++        //this.goalSelector.a(7, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 6.0F)); // Genie
++        //this.goalSelector.a(8, new PathfinderGoalRandomLookaround(this)); // Genie
+         this.targetSelector.a(1, new EntityLlama.c(this));
+         this.targetSelector.a(2, new EntityLlama.a(this));
+     }
+diff --git a/src/main/java/net/minecraft/server/EntityOcelot.java b/src/main/java/net/minecraft/server/EntityOcelot.java
+index d9a7b8ac1eac58e02607f4df0c9413239fcec3a4..6da5b0a9f3985aab812c5e623aee5216454593b6 100644
+--- a/src/main/java/net/minecraft/server/EntityOcelot.java
++++ b/src/main/java/net/minecraft/server/EntityOcelot.java
+@@ -52,7 +52,7 @@ public class EntityOcelot extends EntityAnimal {
+         this.goalSelector.a(8, new PathfinderGoalOcelotAttack(this));
+         this.goalSelector.a(9, new PathfinderGoalBreed(this, 0.8D));
+         this.goalSelector.a(10, new PathfinderGoalRandomStrollLand(this, 0.8D, 1.0000001E-5F));
+-        this.goalSelector.a(11, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 10.0F));
++        //this.goalSelector.a(11, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 10.0F)); // Genie
+         this.targetSelector.a(1, new PathfinderGoalNearestAttackableTarget<>(this, EntityChicken.class, false));
+         this.targetSelector.a(1, new PathfinderGoalNearestAttackableTarget<>(this, EntityTurtle.class, 10, false, false, EntityTurtle.bw));
+     }
+diff --git a/src/main/java/net/minecraft/server/EntityPanda.java b/src/main/java/net/minecraft/server/EntityPanda.java
+index f50ed19080257b9199bf1b8b846877a2ba1cafbb..4b915e4829750de0dbe794e45d47e2520d298c43 100644
+--- a/src/main/java/net/minecraft/server/EntityPanda.java
++++ b/src/main/java/net/minecraft/server/EntityPanda.java
+@@ -30,7 +30,7 @@ public class EntityPanda extends EntityAnimal {
+     private float bK;
+     private float bL;
+     private float bM;
+-    private EntityPanda.g bN;
++    //private EntityPanda.g bN; // Genie
+     private static final Predicate<EntityItem> PICKUP_PREDICATE = (entityitem) -> {
+         Item item = entityitem.getItemStack().getItem();
+ 
+@@ -210,9 +210,9 @@ public class EntityPanda extends EntityAnimal {
+         this.goalSelector.a(7, new EntityPanda.k());
+         this.goalSelector.a(8, new EntityPanda.f(this));
+         this.goalSelector.a(8, new EntityPanda.l(this));
+-        this.bN = new EntityPanda.g(this, EntityHuman.class, 6.0F);
+-        this.goalSelector.a(9, this.bN);
+-        this.goalSelector.a(10, new PathfinderGoalRandomLookaround(this));
++        //this.bN = new EntityPanda.g(this, EntityHuman.class, 6.0F); // Genie
++        //this.goalSelector.a(9, this.bN); // Genie
++        //this.goalSelector.a(10, new PathfinderGoalRandomLookaround(this)); // Genie
+         this.goalSelector.a(12, new EntityPanda.j(this));
+         this.goalSelector.a(13, new PathfinderGoalFollowParent(this, 1.25D));
+         this.goalSelector.a(14, new PathfinderGoalRandomStrollLand(this, 1.0D));
+@@ -432,15 +432,14 @@ public class EntityPanda extends EntityAnimal {
+         this.world.addParticle(Particles.SNEEZE, this.locX() - (double) (this.getWidth() + 1.0F) * 0.5D * (double) MathHelper.sin(this.aI * 0.017453292F), this.getHeadY() - 0.10000000149011612D, this.locZ() + (double) (this.getWidth() + 1.0F) * 0.5D * (double) MathHelper.cos(this.aI * 0.017453292F), vec3d.x, 0.0D, vec3d.z);
+         this.a(SoundEffects.ENTITY_PANDA_SNEEZE, 1.0F, 1.0F);
+         List<EntityPanda> list = this.world.a(EntityPanda.class, this.getBoundingBox().g(10.0D));
+-        Iterator iterator = list.iterator();
+-
+-        while (iterator.hasNext()) {
+-            EntityPanda entitypanda = (EntityPanda) iterator.next();
+ 
++        for (EntityPanda entitypanda : list) {
+             if (!entitypanda.isBaby() && entitypanda.onGround && !entitypanda.isInWater() && entitypanda.eL()) {
+                 if (new com.destroystokyo.paper.event.entity.EntityJumpEvent(getBukkitLivingEntity()).callEvent()) { // Paper
+-                entitypanda.jump();
+-                } else { this.setJumping(false); } // Paper - setJumping(false) stops a potential loop
++                    entitypanda.jump();
++                } else {
++                    this.setJumping(false);
++                } // Paper - setJumping(false) stops a potential loop
+             }
+         }
+ 
+@@ -812,7 +811,7 @@ public class EntityPanda extends EntityAnimal {
+                         if (this.e.doAITick()) {
+                             EntityHuman entityhuman = this.b.a(EntityPanda.bD, (EntityLiving) this.e);
+ 
+-                            this.e.bN.a((EntityLiving) entityhuman);
++                            //this.e.bN.a((EntityLiving) entityhuman); // Genie
+                         }
+                     }
+ 
+@@ -922,49 +921,51 @@ public class EntityPanda extends EntityAnimal {
+         }
+     }
+ 
+-    static class g extends PathfinderGoalLookAtPlayer {
+-
+-        private final EntityPanda g;
+-
+-        public g(EntityPanda entitypanda, Class<? extends EntityLiving> oclass, float f) {
+-            super(entitypanda, oclass, f);
+-            this.g = entitypanda;
+-        }
+-
+-        public void a(EntityLiving entityliving) {
+-            this.b = entityliving;
+-        }
+-
+-        @Override
+-        public boolean b() {
+-            return this.b != null && super.b();
+-        }
+-
+-        @Override
+-        public boolean a() {
+-            if (this.a.getRandom().nextFloat() >= this.d) {
+-                return false;
+-            } else {
+-                if (this.b == null) {
+-                    if (this.e == EntityHuman.class) {
+-                        this.b = this.a.world.a(this.f, this.a, this.a.locX(), this.a.getHeadY(), this.a.locZ());
+-                    } else {
+-                        this.b = this.a.world.b(this.e, this.f, this.a, this.a.locX(), this.a.getHeadY(), this.a.locZ(), this.a.getBoundingBox().grow((double) this.c, 3.0D, (double) this.c));
+-                    }
+-                }
+-
+-                return this.g.eL() && this.b != null;
+-            }
+-        }
+-
+-        @Override
+-        public void e() {
+-            if (this.b != null) {
+-                super.e();
+-            }
+-
+-        }
+-    }
++    // Genie start
++//    static class g extends PathfinderGoalLookAtPlayer {
++//
++//        private final EntityPanda g;
++//
++//        public g(EntityPanda entitypanda, Class<? extends EntityLiving> oclass, float f) {
++//            super(entitypanda, oclass, f);
++//            this.g = entitypanda;
++//        }
++//
++//        public void a(EntityLiving entityliving) {
++//            this.b = entityliving;
++//        }
++//
++//        @Override
++//        public boolean b() {
++//            return this.b != null && super.b();
++//        }
++//
++//        @Override
++//        public boolean a() {
++//            if (this.a.getRandom().nextFloat() >= this.d) {
++//                return false;
++//            } else {
++//                if (this.b == null) {
++//                    if (this.e == EntityHuman.class) {
++//                        this.b = this.a.world.a(this.f, this.a, this.a.locX(), this.a.getHeadY(), this.a.locZ());
++//                    } else {
++//                        this.b = this.a.world.b(this.e, this.f, this.a, this.a.locX(), this.a.getHeadY(), this.a.locZ(), this.a.getBoundingBox().grow((double) this.c, 3.0D, (double) this.c));
++//                    }
++//                }
++//
++//                return this.g.eL() && this.b != null;
++//            }
++//        }
++//
++//        @Override
++//        public void e() {
++//            if (this.b != null) {
++//                super.e();
++//            }
++//
++//        }
++//    }
++    // Genie end
+ 
+     static class b extends PathfinderGoalMeleeAttack {
+ 
+diff --git a/src/main/java/net/minecraft/server/EntityParrot.java b/src/main/java/net/minecraft/server/EntityParrot.java
+index 1402087612e04a92165d50721f776b855d89bfe1..a9f4a7d14ac85b238fd0d14f777a324fcc897b89 100644
+--- a/src/main/java/net/minecraft/server/EntityParrot.java
++++ b/src/main/java/net/minecraft/server/EntityParrot.java
+@@ -83,9 +83,9 @@ public class EntityParrot extends EntityPerchable implements EntityBird {
+     @Override
+     protected void initPathfinder() {
+         this.goalSit = new PathfinderGoalSit(this);
+-        this.goalSelector.a(0, new PathfinderGoalPanic(this, 1.25D));
++        //this.goalSelector.a(0, new PathfinderGoalPanic(this, 1.25D)); // Genie
+         this.goalSelector.a(0, new PathfinderGoalFloat(this));
+-        this.goalSelector.a(1, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
++        //this.goalSelector.a(1, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F)); // Genie
+         this.goalSelector.a(2, this.goalSit);
+         this.goalSelector.a(2, new PathfinderGoalFollowOwner(this, 1.0D, 5.0F, 1.0F, true));
+         this.goalSelector.a(2, new PathfinderGoalRandomFly(this, 1.0D));
+diff --git a/src/main/java/net/minecraft/server/EntityPig.java b/src/main/java/net/minecraft/server/EntityPig.java
+index 8d277566e9df010b6f86385bc8f018e4c8c2d3bf..27139bdb18840019328609c3280304faeebe4a2d 100644
+--- a/src/main/java/net/minecraft/server/EntityPig.java
++++ b/src/main/java/net/minecraft/server/EntityPig.java
+@@ -22,14 +22,14 @@ public class EntityPig extends EntityAnimal {
+     @Override
+     protected void initPathfinder() {
+         this.goalSelector.a(0, new PathfinderGoalFloat(this));
+-        this.goalSelector.a(1, new PathfinderGoalPanic(this, 1.25D));
++        //this.goalSelector.a(1, new PathfinderGoalPanic(this, 1.25D)); // Genie
+         this.goalSelector.a(3, new PathfinderGoalBreed(this, 1.0D));
+         this.goalSelector.a(4, new PathfinderGoalTempt(this, 1.2D, RecipeItemStack.a(Items.CARROT_ON_A_STICK), false));
+         this.goalSelector.a(4, new PathfinderGoalTempt(this, 1.2D, false, EntityPig.by));
+         this.goalSelector.a(5, new PathfinderGoalFollowParent(this, 1.1D));
+         this.goalSelector.a(6, new PathfinderGoalRandomStrollLand(this, 1.0D));
+-        this.goalSelector.a(7, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 6.0F));
+-        this.goalSelector.a(8, new PathfinderGoalRandomLookaround(this));
++        //this.goalSelector.a(7, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 6.0F)); // Genie
++        //this.goalSelector.a(8, new PathfinderGoalRandomLookaround(this)); // Genie
+     }
+ 
+     @Override
+diff --git a/src/main/java/net/minecraft/server/EntityRabbit.java b/src/main/java/net/minecraft/server/EntityRabbit.java
+index 2ed2d0b6bb93cf6d3b928f365811289e213614e5..a85746e2d0366352d7eeea5a777f61aa4d135c8c 100644
+--- a/src/main/java/net/minecraft/server/EntityRabbit.java
++++ b/src/main/java/net/minecraft/server/EntityRabbit.java
+@@ -37,7 +37,7 @@ public class EntityRabbit extends EntityAnimal {
+         this.goalSelector.a(4, new EntityRabbit.PathfinderGoalRabbitAvoidTarget<>(this, EntityMonster.class, 4.0F, 2.2D, 2.2D));
+         this.goalSelector.a(5, new EntityRabbit.PathfinderGoalEatCarrots(this));
+         this.goalSelector.a(6, new PathfinderGoalRandomStrollLand(this, 0.6D));
+-        this.goalSelector.a(11, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 10.0F));
++        //this.goalSelector.a(11, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 10.0F)); // Genie
+     }
+ 
+     @Override
+diff --git a/src/main/java/net/minecraft/server/EntitySheep.java b/src/main/java/net/minecraft/server/EntitySheep.java
+index a8ef98981d4114ccf4ccaa7a49582ab1e2c7f468..2e6dca82a5b53fb546737d572a0e01a25ecaae8e 100644
+--- a/src/main/java/net/minecraft/server/EntitySheep.java
++++ b/src/main/java/net/minecraft/server/EntitySheep.java
+@@ -61,14 +61,14 @@ public class EntitySheep extends EntityAnimal {
+     protected void initPathfinder() {
+         this.bA = new PathfinderGoalEatTile(this);
+         this.goalSelector.a(0, new PathfinderGoalFloat(this));
+-        this.goalSelector.a(1, new PathfinderGoalPanic(this, 1.25D));
++        //this.goalSelector.a(1, new PathfinderGoalPanic(this, 1.25D)); // Genie
+         this.goalSelector.a(2, new PathfinderGoalBreed(this, 1.0D));
+         this.goalSelector.a(3, new PathfinderGoalTempt(this, 1.1D, RecipeItemStack.a(Items.WHEAT), false));
+         this.goalSelector.a(4, new PathfinderGoalFollowParent(this, 1.1D));
+         this.goalSelector.a(5, this.bA);
+         this.goalSelector.a(6, new PathfinderGoalRandomStrollLand(this, 1.0D));
+-        this.goalSelector.a(7, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 6.0F));
+-        this.goalSelector.a(8, new PathfinderGoalRandomLookaround(this));
++        //this.goalSelector.a(7, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 6.0F)); // Genie
++        //this.goalSelector.a(8, new PathfinderGoalRandomLookaround(this)); // Genie
+     }
+ 
+     @Override
+diff --git a/src/main/java/net/minecraft/server/EntityTurtle.java b/src/main/java/net/minecraft/server/EntityTurtle.java
+index b24a5100b452f69f771b724ca96d34613c7fa170..e5a1c695ef63c81f41bf32c347736cc999318778 100644
+--- a/src/main/java/net/minecraft/server/EntityTurtle.java
++++ b/src/main/java/net/minecraft/server/EntityTurtle.java
+@@ -141,14 +141,14 @@ public class EntityTurtle extends EntityAnimal {
+ 
+     @Override
+     protected void initPathfinder() {
+-        this.goalSelector.a(0, new EntityTurtle.f(this, 1.2D));
++        //this.goalSelector.a(0, new EntityTurtle.f(this, 1.2D));
+         this.goalSelector.a(1, new EntityTurtle.a(this, 1.0D));
+         this.goalSelector.a(1, new EntityTurtle.d(this, 1.0D));
+         this.goalSelector.a(2, new EntityTurtle.i(this, 1.1D, Blocks.SEAGRASS.getItem()));
+         this.goalSelector.a(3, new EntityTurtle.c(this, 1.0D));
+         this.goalSelector.a(4, new EntityTurtle.b(this, 1.0D));
+         this.goalSelector.a(7, new EntityTurtle.j(this, 1.0D));
+-        this.goalSelector.a(8, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
++        //this.goalSelector.a(8, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F)); // Genie
+         this.goalSelector.a(9, new EntityTurtle.h(this, 1.0D, 100));
+     }
+ 
+@@ -730,28 +730,30 @@ public class EntityTurtle extends EntityAnimal {
+         }
+     }
+ 
+-    static class f extends PathfinderGoalPanic {
+-
+-        f(EntityTurtle entityturtle, double d0) {
+-            super(entityturtle, d0);
+-        }
+-
+-        @Override
+-        public boolean a() {
+-            if (this.a.getLastDamager() == null && !this.a.isBurning()) {
+-                return false;
+-            } else {
+-                BlockPosition blockposition = this.a(this.a.world, this.a, 7, 4);
+-
+-                if (blockposition != null) {
+-                    this.c = (double) blockposition.getX();
+-                    this.d = (double) blockposition.getY();
+-                    this.e = (double) blockposition.getZ();
+-                    return true;
+-                } else {
+-                    return this.g();
+-                }
+-            }
+-        }
+-    }
++    // Genie start
++//    static class f extends PathfinderGoalPanic {
++//
++//        f(EntityTurtle entityturtle, double d0) {
++//            super(entityturtle, d0);
++//        }
++//
++//        @Override
++//        public boolean a() {
++//            if (this.a.getLastDamager() == null && !this.a.isBurning()) {
++//                return false;
++//            } else {
++//                BlockPosition blockposition = this.a(this.a.world, this.a, 7, 4);
++//
++//                if (blockposition != null) {
++//                    this.c = (double) blockposition.getX();
++//                    this.d = (double) blockposition.getY();
++//                    this.e = (double) blockposition.getZ();
++//                    return true;
++//                } else {
++//                    return this.g();
++//                }
++//            }
++//        }
++//    }
++    // Genie end
+ }
+diff --git a/src/main/java/net/minecraft/server/EntityVillagerAbstract.java b/src/main/java/net/minecraft/server/EntityVillagerAbstract.java
+index 9b75c67c72bc2837cf12bf7ef8172031831deb6e..e2a15a8c227ad749d9ac9899009fc5e949e6b291 100644
+--- a/src/main/java/net/minecraft/server/EntityVillagerAbstract.java
++++ b/src/main/java/net/minecraft/server/EntityVillagerAbstract.java
+@@ -238,10 +238,7 @@ public abstract class EntityVillagerAbstract extends EntityAgeable implements NP
+             }
+         }
+ 
+-        Iterator iterator = set.iterator();
+-
+-        while (iterator.hasNext()) {
+-            Integer integer = (Integer) iterator.next();
++        for (Integer integer : set) {
+             VillagerTrades.IMerchantRecipeOption villagertrades_imerchantrecipeoption = avillagertrades_imerchantrecipeoption[integer];
+             MerchantRecipe merchantrecipe = villagertrades_imerchantrecipeoption.a(this, this.random);
+ 

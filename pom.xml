@@ -1,18 +1,18 @@
 <project>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.tuinity</groupId>
-    <artifactId>tuinity-parent</artifactId>
+    <groupId>net.awnw</groupId>
+    <artifactId>genie-parent</artifactId>
     <version>dev-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>Tuinity (Parent)</name>
+    <name>Genie (Parent)</name>
 
     <build>
         <defaultGoal>install</defaultGoal>
         <finalName>${project.artifactId}</finalName>
     </build>
     <modules>
-        <module>Tuinity-API</module>
-        <module>Tuinity-Server</module>
+        <module>Genie-API</module>
+        <module>Genie-Server</module>
     </modules>
 </project>

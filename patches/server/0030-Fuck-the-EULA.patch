@@ -1,0 +1,39 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: TheMGRF <thomas.grf@googlemail.com>
+Date: Sat, 21 Mar 2020 17:14:08 +0000
+Subject: [PATCH] Fuck the EULA
+
+
+diff --git a/src/main/java/net/minecraft/server/EULA.java b/src/main/java/net/minecraft/server/EULA.java
+index e54730f097ffbfe1e597f6a74a84c4a99a3485a8..d464699e31fd076193431f3b5fc3585ad107b30a 100644
+--- a/src/main/java/net/minecraft/server/EULA.java
++++ b/src/main/java/net/minecraft/server/EULA.java
+@@ -29,7 +29,7 @@ public class EULA {
+                 Properties properties = new Properties();
+ 
+                 properties.load(inputstream);
+-                flag = Boolean.parseBoolean(properties.getProperty("eula", "false"));
++                flag = Boolean.parseBoolean(properties.getProperty("eula", "true"));
+             } catch (Throwable throwable1) {
+                 throwable = throwable1;
+                 throw throwable1;
+@@ -48,7 +48,7 @@ public class EULA {
+ 
+             }
+ 
+-            return flag;
++            return true;
+         } catch (Exception exception) {
+             EULA.LOGGER.warn("Failed to load {}", this.b);
+             this.c();
+@@ -69,8 +69,8 @@ public class EULA {
+                 try {
+                     Properties properties = new Properties();
+ 
+-                    properties.setProperty("eula", "false");
+-                    properties.store(outputstream, "By changing the setting below to TRUE you are indicating your agreement to our EULA (https://account.mojang.com/documents/minecraft_eula).");  // Paper - fix lag; // Tuinity - Tacos are disgusting
++                    properties.setProperty("eula", "true");
++                    properties.store(outputstream, "By changing the setting below to TRUE you are indicating your agreement to our EULA (https://account.mojang.com/documents/minecraft_eula).\nYou also agree that tacos are a reasonable source of nutrition."); // Genie - Tacos are okay // Tuinity - Tacos are disgusting // Paper - fix lag;
+                 } catch (Throwable throwable1) {
+                     throwable = throwable1;
+                     throw throwable1;
